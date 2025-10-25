@@ -12,7 +12,13 @@ class MealPlannerScreen extends StatefulWidget {
 
 class _MealPlannerScreenState extends State<MealPlannerScreen> {
   final Map<String, Recipe?> weekPlan = {
-    'Mon': null, 'Tue': null, 'Wed': null, 'Thu': null, 'Fri': null, 'Sat': null, 'Sun': null,
+    'Mon': null,
+    'Tue': null,
+    'Wed': null,
+    'Thu': null,
+    'Fri': null,
+    'Sat': null,
+    'Sun': null,
   };
 
   @override
@@ -22,13 +28,14 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
         Expanded(
           child: ListView(
             children: weekPlan.keys.map((day) {
+              final Recipe? selectedRecipe = weekPlan[day];
               return ListTile(
                 title: Text(day),
-                subtitle: Text(weekPlan[day]?.title ?? 'Select Recipe'),
+                subtitle: Text(selectedRecipe?.title ?? 'Select Recipe'),
                 trailing: IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () async {
-                    final recipe = await showDialog<Recipe>(
+                    final Recipe? recipe = await showDialog<Recipe>(
                       context: context,
                       builder: (_) => SimpleDialog(
                         title: const Text('Select Recipe'),
@@ -40,6 +47,7 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
                             .toList(),
                       ),
                     );
+
                     if (recipe != null) {
                       setState(() => weekPlan[day] = recipe);
                     }
@@ -49,18 +57,28 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
             }).toList(),
           ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            final list = GroceryListService.generateGroceryList(weekPlan);
-            showDialog(
-              context: context,
-              builder: (_) => AlertDialog(
-                title: const Text('Grocery List'),
-                content: Text(list.join('\n')),
-              ),
-            );
-          },
-          child: const Text('Generate Grocery List'),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            onPressed: () {
+              final List<String> groceryList =
+                  GroceryListService.generateGroceryList(weekPlan);
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  title: const Text('Grocery List'),
+                  content: Text(groceryList.join('\n')),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Close'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            child: const Text('Generate Grocery List'),
+          ),
         ),
       ],
     );

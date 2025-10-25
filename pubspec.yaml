@@ -25,18 +25,18 @@ flutter:
   uses-material-design: true
 
   assets:
-    - C:\inclass4\recipe_planner_app\assets\images\burger.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\burrito.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\chicken_curry.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\fried_rice.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\fruit_salad.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\grilled_fish.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\noodles.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\omelette.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\pancakes.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\pizza.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\salad.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\sandwich.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\smoothie.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\tomato_soup.jpg
-    - C:\inclass4\recipe_planner_app\assets\images\veggie_pasta.jpg
+    - assets/images/burger.jpg
+    - assets/images/burrito.jpg
+    - assets/images/chicken_curry.jpg
+    - assets/images/fried_rice.jpg
+    - assets/images/fruit_salad.jpg
+    - assets/images/grilled_fish.jpg
+    - assets/images/noodles.jpg
+    - assets/images/omelette.jpg
+    - assets/images/pancakes.jpg
+    - assets/images/pizza.jpg
+    - assets/images/salad.jpg
+    - assets/images/sandwich.jpg
+    - assets/images/smoothie.jpg
+    - assets/images/tomato_soup.jpg
+    - assets/images/veggie_pasta.jpg

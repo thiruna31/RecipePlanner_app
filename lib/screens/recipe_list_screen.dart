@@ -20,9 +20,10 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Recipe> filtered = sampleRecipes.where((r) {
-      return Filters.apply(r, _vegan, _vegetarian, _glutenFree);
-    }).toList();
+    
+    List<Recipe> filtered = sampleRecipes.where(
+      (r) => Filters.apply(r, _vegan, _vegetarian, _glutenFree),
+    ).toList();
 
     return Column(
       children: [
@@ -30,11 +31,11 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
           vegan: _vegan,
           vegetarian: _vegetarian,
           glutenFree: _glutenFree,
-          onChanged: (v, vg, gf) {
+          onChanged: (vegetarian, vegan, glutenFree) {
             setState(() {
-              _vegan = vg;
-              _vegetarian = v;
-              _glutenFree = gf;
+              _vegan = vegan;
+              _vegetarian = vegetarian;
+              _glutenFree = glutenFree;
             });
           },
         ),
@@ -42,7 +43,7 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
           child: ListView.builder(
             itemCount: filtered.length,
             itemBuilder: (context, index) {
-              final recipe = filtered[index];
+              final Recipe recipe = filtered[index];
               return RecipeCard(
                 recipe: recipe,
                 onTap: () => Navigator.push(

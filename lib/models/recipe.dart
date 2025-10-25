@@ -19,6 +19,7 @@ class Recipe {
     this.isGlutenFree = false,
   });
 
+  
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -32,16 +33,17 @@ class Recipe {
     };
   }
 
+  
   factory Recipe.fromMap(Map<String, dynamic> map) {
     return Recipe(
-      id: map['id'],
-      title: map['title'],
-      imageUrl: map['imageUrl'],
-      ingredients: map['ingredients'].split('|'),
-      steps: map['steps'].split('|'),
-      isVegan: map['isVegan'] == 1,
-      isVegetarian: map['isVegetarian'] == 1,
-      isGlutenFree: map['isGlutenFree'] == 1,
+      id: map['id'] as String,
+      title: map['title'] as String,
+      imageUrl: map['imageUrl'] as String,
+      ingredients: (map['ingredients'] as String).split('|'),
+      steps: (map['steps'] as String).split('|'),
+      isVegan: (map['isVegan'] as int) == 1,
+      isVegetarian: (map['isVegetarian'] as int) == 1,
+      isGlutenFree: (map['isGlutenFree'] as int) == 1,
     );
   }
 }

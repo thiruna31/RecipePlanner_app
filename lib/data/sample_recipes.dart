@@ -1,8 +1,10 @@
+import '../models/recipe.dart';
+
 final List<Recipe> sampleRecipes = [
   Recipe(
     id: '1',
     title: 'Veggie Pasta',
-    imageUrl: 'assets/images/veggie_pasta.jpg',
+    imageUrl: 'veggie_pasta.jpg',
     ingredients: ['Pasta', 'Tomatoes', 'Basil', 'Olive Oil'],
     steps: ['Boil pasta', 'Prepare sauce', 'Mix and serve'],
     isVegan: true,
@@ -11,14 +13,14 @@ final List<Recipe> sampleRecipes = [
   Recipe(
     id: '2',
     title: 'Chicken Curry',
-    imageUrl: 'assets/images/chicken_curry.jpg',
+    imageUrl: 'chicken_curry.jpg',
     ingredients: ['Chicken', 'Curry powder', 'Onions', 'Garlic'],
     steps: ['Cook chicken', 'Add spices', 'Simmer until done'],
   ),
   Recipe(
     id: '3',
     title: 'Fresh Salad',
-    imageUrl: 'assets/images/salad.jpg',
+    imageUrl: 'salad.jpg',
     ingredients: ['Lettuce', 'Tomatoes', 'Cucumber', 'Olive Oil'],
     steps: ['Chop veggies', 'Mix with dressing'],
     isVegan: true,
@@ -28,7 +30,7 @@ final List<Recipe> sampleRecipes = [
   Recipe(
     id: '4',
     title: 'Smoothie',
-    imageUrl: 'assets/images/smoothie.jpg',
+    imageUrl: 'smoothie.jpg',
     ingredients: ['Banana', 'Milk', 'Honey'],
     steps: ['Blend all ingredients', 'Serve chilled'],
     isVegetarian: true,
@@ -36,7 +38,7 @@ final List<Recipe> sampleRecipes = [
   Recipe(
     id: '5',
     title: 'Sandwich',
-    imageUrl: 'assets/images/sandwich.jpg',
+    imageUrl: 'sandwich.jpg',
     ingredients: ['Bread', 'Lettuce', 'Cheese', 'Tomato'],
     steps: ['Layer ingredients', 'Grill lightly'],
     isVegetarian: true,
@@ -44,21 +46,21 @@ final List<Recipe> sampleRecipes = [
   Recipe(
     id: '6',
     title: 'Pancakes',
-    imageUrl: 'assets/images/pancakes.jpg',
+    imageUrl: 'pancakes.jpg',
     ingredients: ['Flour', 'Eggs', 'Milk', 'Butter'],
     steps: ['Mix ingredients', 'Cook on pan', 'Serve with syrup'],
   ),
   Recipe(
     id: '7',
     title: 'Fried Rice',
-    imageUrl: 'assets/images/fried_rice.jpg',
+    imageUrl: 'fried_rice.jpg',
     ingredients: ['Rice', 'Soy Sauce', 'Vegetables'],
     steps: ['Stir-fry veggies', 'Add rice', 'Season and serve'],
   ),
   Recipe(
     id: '8',
     title: 'Tomato Soup',
-    imageUrl: 'assets/images/tomato_soup.jpg',
+    imageUrl: 'tomato_soup.jpg',
     ingredients: ['Tomatoes', 'Garlic', 'Onions', 'Cream'],
     steps: ['Boil ingredients', 'Blend and season'],
     isVegetarian: true,
@@ -67,7 +69,7 @@ final List<Recipe> sampleRecipes = [
   Recipe(
     id: '9',
     title: 'Fruit Salad',
-    imageUrl: 'assets/images/fruit_salad.jpg',
+    imageUrl: 'fruit_salad.jpg',
     ingredients: ['Apple', 'Banana', 'Grapes', 'Orange'],
     steps: ['Cut fruits', 'Mix and chill'],
     isVegan: true,
@@ -76,21 +78,21 @@ final List<Recipe> sampleRecipes = [
   Recipe(
     id: '10',
     title: 'Burrito',
-    imageUrl: 'assets/images/burrito.jpg',
+    imageUrl: 'burrito.jpg',
     ingredients: ['Tortilla', 'Beans', 'Cheese', 'Salsa'],
     steps: ['Fill tortilla', 'Wrap and serve'],
   ),
   Recipe(
     id: '11',
     title: 'Noodles',
-    imageUrl: 'assets/images/noodles.jpg',
+    imageUrl: 'noodles.jpg',
     ingredients: ['Noodles', 'Vegetables', 'Soy Sauce'],
     steps: ['Boil noodles', 'Stir-fry with vegetables'],
   ),
   Recipe(
     id: '12',
     title: 'Grilled Fish',
-    imageUrl: 'assets/images/grilled_fish.jpg',
+    imageUrl: 'grilled_fish.jpg',
     ingredients: ['Fish', 'Lemon', 'Garlic', 'Herbs'],
     steps: ['Marinate fish', 'Grill and serve'],
     isGlutenFree: true,
@@ -98,7 +100,7 @@ final List<Recipe> sampleRecipes = [
   Recipe(
     id: '13',
     title: 'Omelette',
-    imageUrl: 'assets/images/omelette.jpg',
+    imageUrl: 'omelette.jpg',
     ingredients: ['Eggs', 'Salt', 'Pepper', 'Butter'],
     steps: ['Whisk eggs', 'Cook in butter'],
     isGlutenFree: true,
@@ -106,14 +108,14 @@ final List<Recipe> sampleRecipes = [
   Recipe(
     id: '14',
     title: 'Pizza',
-    imageUrl: 'assets/images/pizza.jpg',
+    imageUrl: 'pizza.jpg',
     ingredients: ['Pizza base', 'Tomato sauce', 'Cheese', 'Toppings'],
     steps: ['Add toppings', 'Bake in oven'],
   ),
   Recipe(
     id: '15',
     title: 'Burger',
-    imageUrl: 'assets/images/burger.jpg',
+    imageUrl: 'burger.jpg',
     ingredients: ['Bun', 'Patty', 'Lettuce', 'Sauce'],
     steps: ['Assemble burger', 'Grill if needed'],
   ),
