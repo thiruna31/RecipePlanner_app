@@ -14,6 +14,19 @@ class RecipeDetailScreen extends StatefulWidget {
 class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   bool isFav = false;
 
+  @override
+  void initState() {
+    super.initState();
+    _loadFavouriteStatus();
+  }
+
+  Future<void> _loadFavouriteStatus() async {
+    final favs = await DBService.getFavourites();
+    setState(() {
+      isFav = favs.any((r) => r.id == widget.recipe.id);
+    });
+  }
+
   void shareRecipe() {
     final content = '''
 ${widget.recipe.title}
@@ -57,7 +70,9 @@ ${widget.recipe.steps.join("\n")}
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            Image.network(recipe.imageUrl, height: 200, fit: BoxFit.cover),
+            (recipe.imageUrl.startsWith('http') || recipe.imageUrl.startsWith('https'))
+                ? Image.network(recipe.imageUrl, height: 200, fit: BoxFit.cover)
+                : Image.asset(recipe.imageUrl, height: 200, fit: BoxFit.cover),
             const SizedBox(height: 16),
             const Text('Ingredients', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ...recipe.ingredients.map((e) => Text('• $e')),

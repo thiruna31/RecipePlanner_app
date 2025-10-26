@@ -25,24 +25,47 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
     setState(() {});
   }
 
+  Future<void> _removeFromFavourites(Recipe recipe) async {
+    await DBService.removeFavourite(recipe.id); // Passes recipe id, not object!
+    await _loadFavourites(); // Make sure to await for list update
+  }
+
   @override
   Widget build(BuildContext context) {
-    return favourites.isEmpty
-        ? const Center(child: Text('No favourites yet.'))
-        : ListView.builder(
-            itemCount: favourites.length,
-            itemBuilder: (context, index) {
-              final recipe = favourites[index];
-              return RecipeCard(
-                recipe: recipe,
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => RecipeDetailScreen(recipe: recipe),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Your Favourites'),
+        backgroundColor: Colors.teal,
+        centerTitle: true,
+      ),
+      body: favourites.isEmpty
+          ? const Center(child: Text('No favourites yet.'))
+          : ListView.builder(
+              itemCount: favourites.length,
+              itemBuilder: (context, index) {
+                final recipe = favourites[index];
+                return Dismissible(
+                  key: Key(recipe.id),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    color: Colors.red,
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.only(right: 24),
+                    child: const Icon(Icons.delete, color: Colors.white),
                   ),
-                ),
-              );
-            },
-          );
+                  onDismissed: (_) => _removeFromFavourites(recipe),
+                  child: RecipeCard(
+                    recipe: recipe,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => RecipeDetailScreen(recipe: recipe),
+                      ),
+                    ).then((_) => _loadFavourites()),
+                  ),
+                );
+              },
+            ),
+    );
   }
 }

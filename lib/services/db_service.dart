@@ -20,7 +20,8 @@ class DBService {
             steps TEXT,
             isVegan INTEGER,
             isVegetarian INTEGER,
-            isGlutenFree INTEGER
+            isGlutenFree INTEGER,
+            isNonVeg INTEGER
           )
         ''');
       },
@@ -28,8 +29,11 @@ class DBService {
   }
 
   static Future<void> addFavourite(Recipe recipe) async {
-    await _db!.insert('favourites', recipe.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    await _db!.insert(
+      'favourites',
+      recipe.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   static Future<void> removeFavourite(String id) async {
