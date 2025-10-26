@@ -10,7 +10,7 @@ class GroceryListScreen extends StatefulWidget {
 class _GroceryListScreenState extends State<GroceryListScreen> {
   final List<Map<String, dynamic>> _groceries = [];
 
-  // Maps normalized names to image paths
+  
   final Map<String, String> _imageMap = {
     'burger': 'assets/images/burger.jpg',
     'burrito': 'assets/images/burrito.jpg',
@@ -51,7 +51,7 @@ class _GroceryListScreenState extends State<GroceryListScreen> {
             onPressed: () {
               final name = nameController.text.trim();
               if (name.isNotEmpty) {
-                // Normalize the name to match the image map (lowercase, underscores)
+                
                 String normalized = name.toLowerCase().replaceAll(' ', '_');
                 String image = _imageMap[normalized] ?? _imageMap.values.first;
                 setState(() {

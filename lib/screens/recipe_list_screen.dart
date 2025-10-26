@@ -90,7 +90,7 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
             IconButton(
               icon: const Icon(Icons.favorite, color: Colors.red),
               onPressed: () {
-                // Show favorites in AlertDialog (replace with navigation for full favorites screen)
+                
                 showDialog(
                   context: context,
                   builder: (_) => AlertDialog(
@@ -153,15 +153,15 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
                 child: GridView.builder(
                   itemCount: filteredRecipes.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // 2 per row
+                    crossAxisCount: 2, 
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    childAspectRatio: 1, // square
+                    childAspectRatio: 1, 
                   ),
                   itemBuilder: (context, idx) {
                     final recipe = filteredRecipes[idx];
                     return GestureDetector(
-                      onTap: () {}, // Add detail navigation here
+                      onTap: () {}, 
                       child: Card(
                         elevation: 3,
                         shape: RoundedRectangleBorder(

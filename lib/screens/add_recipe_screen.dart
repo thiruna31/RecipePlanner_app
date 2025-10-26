@@ -25,6 +25,6 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       final recipe = Recipe(
         id: const Uuid().v4(),
         title: _titleController.text.trim(),
-        imageUrl: '', // Add file picker or asset if available
+        imageUrl: '', 
         ingredients: _ingredientsController.text.trim().split(',').map((s) => s.trim()).toList(),
         steps: _stepsController.text.trim().split

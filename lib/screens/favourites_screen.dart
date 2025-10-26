@@ -26,8 +26,8 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   }
 
   Future<void> _removeFromFavourites(Recipe recipe) async {
-    await DBService.removeFavourite(recipe.id); // Passes recipe id, not object!
-    await _loadFavourites(); // Make sure to await for list update
+    await DBService.removeFavourite(recipe.id); 
+    await _loadFavourites(); 
   }
 
   @override

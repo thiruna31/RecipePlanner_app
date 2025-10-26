@@ -3,6 +3,7 @@ import 'screens/recipe_list_screen.dart';
 import 'screens/favourites_screen.dart';
 import 'screens/meal_planner_screen.dart';
 import 'screens/grocery_list_screen.dart';
+import 'screens/auth_screen.dart';
 import 'services/db_service.dart';
 
 void main() async {
@@ -20,7 +21,8 @@ class RecipeApp extends StatefulWidget {
 
 class _RecipeAppState extends State<RecipeApp> {
   int _selectedIndex = 0;
-  ThemeMode _themeMode = ThemeMode.light; // Start with light mode (white)
+  ThemeMode _themeMode = ThemeMode.light;
+  bool loggedIn = false;
 
   final List<Widget> _screens = [
     const RecipeListScreen(),
@@ -35,8 +37,17 @@ class _RecipeAppState extends State<RecipeApp> {
 
   void _toggleTheme() {
     setState(() {
-      _themeMode = _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+      _themeMode =
+          _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
     });
+  }
+
+  void _completeLogin(bool isLoggedIn) {
+    setState(() => loggedIn = isLoggedIn);
+  }
+
+  void _signOut() {
+    setState(() => loggedIn = false);
   }
 
   @override
@@ -45,7 +56,8 @@ class _RecipeAppState extends State<RecipeApp> {
       debugShowCheckedModeBanner: false,
       title: 'Recipe Planner',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal, brightness: Brightness.light),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.teal, brightness: Brightness.light),
         scaffoldBackgroundColor: Colors.grey[100],
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.teal,
@@ -63,7 +75,8 @@ class _RecipeAppState extends State<RecipeApp> {
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal, brightness: Brightness.dark),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.teal, brightness: Brightness.dark),
         scaffoldBackgroundColor: Colors.black,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
@@ -81,50 +94,57 @@ class _RecipeAppState extends State<RecipeApp> {
         useMaterial3: true,
       ),
       themeMode: _themeMode,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Recipe & Meal Planner'),
-          actions: [
-            IconButton(
-              icon: Icon(_themeMode == ThemeMode.dark
-                  ? Icons.light_mode
-                  : Icons.dark_mode),
-              tooltip: 'Toggle Theme',
-              onPressed: _toggleTheme,
+      home: !loggedIn
+          ? AuthScreen(onAuthComplete: _completeLogin)
+          : Scaffold(
+              appBar: AppBar(
+                title: const Text('Recipe & Meal Planner'),
+                actions: [
+                  IconButton(
+                    icon: Icon(_themeMode == ThemeMode.dark
+                        ? Icons.light_mode
+                        : Icons.dark_mode),
+                    tooltip: 'Toggle Theme',
+                    onPressed: _toggleTheme,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.logout),
+                    tooltip: 'Sign Out',
+                    onPressed: _signOut,
+                  ),
+                ],
+              ),
+              body: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: _screens[_selectedIndex],
+              ),
+              floatingActionButton: _selectedIndex == 0
+                  ? FloatingActionButton(
+                      onPressed: () {
+                       
+                      },
+                      backgroundColor: Colors.teal,
+                      child: const Icon(Icons.add, color: Colors.white),
+                    )
+                  : null,
+              bottomNavigationBar: BottomNavigationBar(
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
+                selectedItemColor: Colors.teal,
+                unselectedItemColor: Colors.grey,
+                type: BottomNavigationBarType.fixed,
+                items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.list_alt), label: 'Recipes'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.favorite), label: 'Favourites'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.calendar_today), label: 'Planner'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.shopping_cart), label: 'Groceries'),
+                ],
+              ),
             ),
-          ],
-        ),
-        body: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: _screens[_selectedIndex],
-        ),
-        floatingActionButton: _selectedIndex == 0
-            ? FloatingActionButton(
-                onPressed: () {
-                  // Implement Add Recipe navigation
-                },
-                backgroundColor: Colors.teal,
-                child: const Icon(Icons.add, color: Colors.white),
-              )
-            : null,
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          selectedItemColor: Colors.teal,
-          unselectedItemColor: Colors.grey,
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list_alt), label: 'Recipes'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Favourites'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today), label: 'Planner'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: 'Groceries'),
-          ],
-        ),
-      ),
     );
   }
 }
