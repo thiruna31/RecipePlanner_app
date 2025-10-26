@@ -148,49 +148,64 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
               ),
             ),
             Expanded(
-              child: ListView.separated(
+              child: Padding(
                 padding: const EdgeInsets.all(12),
-                itemCount: filteredRecipes.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemBuilder: (context, idx) {
-                  final recipe = filteredRecipes[idx];
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)
-                    ),
-                    elevation: 2,
-                    child: ListTile(
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          recipe.imageUrl,
-                          width: 55,
-                          height: 55,
-                          fit: BoxFit.cover,
+                child: GridView.builder(
+                  itemCount: filteredRecipes.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // 2 per row
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 1, // square
+                  ),
+                  itemBuilder: (context, idx) {
+                    final recipe = filteredRecipes[idx];
+                    return GestureDetector(
+                      onTap: () {}, // Add detail navigation here
+                      child: Card(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Expanded(
+                              child: recipe.imageUrl.startsWith('http')
+                                  ? Image.network(recipe.imageUrl, fit: BoxFit.cover)
+                                  : Image.asset(recipe.imageUrl, fit: BoxFit.cover),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    recipe.title,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      dietTag(recipe),
+                                      favoriteButton(recipe),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      title: Text(
-                        recipe.title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                      subtitle: Text(
-                        "${recipe.ingredients.length} ingredients",
-                        style: TextStyle(color: Colors.grey[600], fontSize: 14),
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          dietTag(recipe),
-                          favoriteButton(recipe),
-                        ],
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ],
